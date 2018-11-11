@@ -1,0 +1,50 @@
+$base-color: #ced4da;
+$light-background: lighten(desaturate($base-color, 50%), 12.5%);
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: .25rem;
+}
+
+ul.pagination {
+  margin-top: 0;
+  margin-bottom: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+  .page-link {
+    display: block;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  }
+
+  li.page-item.active {
+    button.page-link {
+      color: saturate(darken($base-color, 50%), 5%);
+      background-color: saturate(lighten($base-color, 7.5%), 2.5%);
+      border-color: $base-color;
+    cursor: auto;
+    }
+  }
+
+  button.page-link {
+    padding: 0.75rem 1rem;
+    min-width: 3.5rem;
+    text-align: center;
+    box-shadow: none;
+    border-color: $base-color;
+    color: saturate(darken($base-color, 30%), 10%);
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $light-background;
+    }
+  }
+}

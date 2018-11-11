@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { loggedIn } from '../../helpers/jwt';
 import * as api from '../../helpers/moviesApi';
-import './Login.css';
+import './Login.scss';
 
 class Login extends Component {
   state = {
