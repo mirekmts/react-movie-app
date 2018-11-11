@@ -1,20 +1,46 @@
 import React, { Component } from 'react';
-import { withAuth, Pagination } from './components';
+import {
+  withAuth, Pagination, Table, Filters,
+} from './components';
 import * as api from './helpers/moviesApi';
-import './App.css';
+import './App.scss';
 
 class App extends Component {
   state = {
     movies: [],
     currentPage: 1,
     totalItems: undefined,
-    pageLimit: 1,
+    pageLimit: 3,
     loading: true,
     error: false,
+    sortBy: '_id',
+    sortDir: 1,
   };
 
   componentDidMount() {
-    api.getAllMovies({ limit: this.state.pageLimit })
+    this.getData();
+  }
+
+  apiFilters = () => {
+    const {
+      sortBy, sortDir, pageLimit, currentPage,
+    } = this.state;
+    return {
+      sortBy,
+      sortDir,
+      limit: pageLimit,
+      page: currentPage,
+    };
+  }
+
+  handleChangeFilters = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    }, this.getData());
+  };
+
+  getData = () => {
+    api.getAllMovies({ ...this.apiFilters() })
       .then((res) => {
         this.setState({
           movies: res.collection,
@@ -34,7 +60,7 @@ class App extends Component {
   onPageChanged = (data) => {
     const { currentPage } = data;
 
-    api.getAllMovies({ page: currentPage, limit: this.state.pageLimit })
+    api.getAllMovies({ ...this.apiFilters(), page: currentPage })
       .then((res) => {
         this.setState({
           movies: res.collection,
@@ -61,28 +87,23 @@ class App extends Component {
       return <div>An error occurred. Please try again.</div>;
     }
 
+    const columns = {
+      ordinal: 'No.',
+      title: 'Title',
+      year: 'Year',
+      metascore: 'Metascore',
+    };
+
+    const movies = this.state.movies.map((movie, index) => {
+      movie.ordinal = index + 1 + ((this.state.currentPage - 1) * this.state.pageLimit);
+      return movie;
+    });
+
     return (
       <div className="App">
-        <table>
-          <thead>
-            <tr>
-              <th>Lp.</th>
-              <th>Title</th>
-              <th>Year</th>
-              <th>Meta Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.movies.map((movie, index) => (
-              <tr key={movie._id}>
-                <td>{index + 1 + ((this.state.currentPage - 1) * this.state.pageLimit)}</td>
-                <td>{movie.title}</td>
-                <td>{movie.year}</td>
-                <td>{movie.metascore}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h1>Movies App</h1>
+        <Filters onChange={this.handleChangeFilters} />
+        <Table columns={columns} rows={movies} />
         <div className="flex">
           <Pagination
             totalRecords={this.state.totalItems}
