@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { loggedIn } from '../../helpers/jwt';
+import * as api from '../../helpers/moviesApi';
 import './Login.css';
 
 class Login extends Component {
-  constructor() {
-    super();
+  state = {
+    username: '',
+    password: '',
+    error: false,
+  };
 
-    this.state = {
-      username: '',
-      password: '',
-      error: false,
-    };
+  componentDidMount() {
+    if (loggedIn()) {
+      this.props.history.replace('/');
+    }
   }
 
   handleChange = (e) => {
@@ -20,6 +25,14 @@ class Login extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
+
+    api.userLogin(this.state.username, this.state.password)
+      .then(() => this.props.history.replace('/'))
+      .catch(() => {
+        this.setState({
+          error: true,
+        });
+      });
   };
 
   render() {
@@ -53,7 +66,11 @@ class Login extends Component {
         </div>
       </div>
     );
-  };
+  }
+}
+
+Login.propTypes = {
+  history: PropTypes.object,
 };
 
 export default Login;
