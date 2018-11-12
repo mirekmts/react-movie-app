@@ -11,6 +11,7 @@ const initialState = {
 const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case actions.FETCH_MOVIES_BEGIN:
+    case actions.FETCH_SINGLE_MOVIE_BEGIN:
       return {
         ...state,
         loading: true,
@@ -31,10 +32,18 @@ const moviesReducer = (state = initialState, action) => {
         movies: [],
         total: 0,
       };
-    case actions.SET_SINGLE_MOVIE:
+    case actions.FETCH_SINGLE_MOVIE_SUCCESS:
       return {
         ...state,
+        loading: false,
         selectedMovie: action.payload.movie,
+      };
+    case actions.FETCH_SINGLE_MOVIE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+        selectedMovie: [],
       };
     default:
       return state;

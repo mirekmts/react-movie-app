@@ -5,3 +5,5 @@ export { default as Table } from './Table';
 export { default as Filters } from './Filters';
 export { default as LoadingSpinner } from './LoadingSpinner';
 export { default as SingleMovie } from './SingleMovie';
+export { default as Actor } from './Actor';
+export { default as ErrorMessage } from './ErrorMessage';

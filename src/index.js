@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 
 import './index.scss';
 import App from './App';
-import { Login, SingleMovie } from './components';
+import { Login, SingleMovie, Actor } from './components';
 import store from './redux/store';
 
 ReactDOM.render(
@@ -15,6 +15,7 @@ ReactDOM.render(
       <div className="container">
         <Route exact path="/" component={App} />
         <Route exact path="/movie/:movieId" component={SingleMovie} />
+        <Route exact path="/actor/:actorId" component={Actor} />
         <Route exact path="/login" component={Login} />
       </div>
     </Router>
