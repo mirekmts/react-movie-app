@@ -1,7 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { range } from '../../helpers/utils';
 import './Pagination.scss';
+import {
+  setPage,
+} from '../../redux/actions';
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
@@ -19,27 +23,12 @@ class Pagination extends Component {
       : 0;
 
     this.totalPages = Math.ceil(this.totalRecords / this.pageLimit);
-
-    this.state = { currentPage: 1 };
-  }
-
-  componentDidMount() {
-    this.gotoPage(1);
   }
 
   gotoPage = (page) => {
-    const { onPageChanged = f => f } = this.props;
+    const currentPage = Math.max(1, Math.min(page, this.totalPages));
 
-    const currentPage = Math.max(0, Math.min(page, this.totalPages));
-
-    const paginationData = {
-      currentPage,
-      totalPages: this.totalPages,
-      pageLimit: this.pageLimit,
-      totalRecords: this.totalRecords,
-    };
-
-    this.setState({ currentPage }, () => onPageChanged(paginationData));
+    this.props.setPage(currentPage);
   }
 
   handleClick = page => (evt) => {
@@ -49,17 +38,17 @@ class Pagination extends Component {
 
   handleMoveLeft = (evt) => {
     evt.preventDefault();
-    this.gotoPage(this.state.currentPage - (this.pageNeighbours * 2) - 1);
+    this.gotoPage(this.props.currentPage - (this.pageNeighbours * 2) - 1);
   }
 
   handleMoveRight = (evt) => {
     evt.preventDefault();
-    this.gotoPage(this.state.currentPage + (this.pageNeighbours * 2) + 1);
+    this.gotoPage(this.props.currentPage + (this.pageNeighbours * 2) + 1);
   }
 
   fetchPageNumbers = () => {
     const { totalPages, pageNeighbours } = this;
-    const { currentPage } = this.state;
+    const { currentPage } = this.props;
     const totalNumbers = (pageNeighbours * 2) + 3;
     const totalBlocks = totalNumbers + 2;
 
@@ -104,7 +93,7 @@ class Pagination extends Component {
   render() {
     if (!this.totalRecords || this.totalPages === 1) return null;
 
-    const { currentPage } = this.state;
+    const { currentPage } = this.props;
     const pages = this.fetchPageNumbers();
 
     return (
@@ -159,4 +148,14 @@ Pagination.propTypes = {
   onPageChanged: PropTypes.func,
 };
 
-export default Pagination;
+const mapStateToProps = state => ({
+  currentPage: state.filters.page,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setPage: (page) => {
+    dispatch(setPage(page));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pagination);

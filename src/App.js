@@ -1,92 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
-  withAuth, Pagination, Table, Filters,
+  withAuth, Pagination, Table, Filters, LoadingSpinner,
 } from './components';
-import * as api from './helpers/moviesApi';
 import './App.scss';
+import {
+  fetchMovies,
+} from './redux/actions';
 
 class App extends Component {
-  state = {
-    movies: [],
-    currentPage: 1,
-    totalItems: undefined,
-    pageLimit: 3,
-    loading: true,
-    error: false,
-    sortBy: '_id',
-    sortDir: 1,
-  };
+  state = { ...this.props.filters }
+
+  getData = () => {
+    this.props.fetchMovies({ ...this.props.filters });
+  }
 
   componentDidMount() {
     this.getData();
   }
 
-  apiFilters = () => {
-    const {
-      sortBy, sortDir, pageLimit, currentPage,
-    } = this.state;
-    return {
-      sortBy,
-      sortDir,
-      limit: pageLimit,
-      page: currentPage,
-    };
-  }
-
-  handleChangeFilters = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    }, this.getData());
-  };
-
-  getData = () => {
-    api.getAllMovies({ ...this.apiFilters() })
-      .then((res) => {
-        this.setState({
-          movies: res.collection,
-          totalItems: res.total,
-          loading: false,
-          error: false,
-        });
-      })
-      .catch(() => {
-        this.setState({
-          error: true,
-          loading: false,
-        });
-      });
-  }
-
-  onPageChanged = (data) => {
-    const { currentPage } = data;
-
-    api.getAllMovies({ ...this.apiFilters(), page: currentPage })
-      .then((res) => {
-        this.setState({
-          movies: res.collection,
-          currentPage,
-          totalItems: res.total,
-          loading: false,
-          error: false,
-        });
-      })
-      .catch(() => {
-        this.setState({
-          error: true,
-          loading: false,
-        });
-      });
-  }
-
-  render() {
-    if (this.state.loading) {
-      return <div>Loading...</div>;
+  componentDidUpdate(prevProps) {
+    if (prevProps.filters.page !== this.props.filters.page
+      || prevProps.filters.limit !== this.props.filters.limit
+      || prevProps.filters.sortBy !== this.props.filters.sortBy
+      || prevProps.filters.sortDir !== this.props.filters.sortDir) {
+      this.getData();
     }
+  }
 
-    if (this.state.error) {
-      return <div>An error occurred. Please try again.</div>;
-    }
-
+  renderContent = () => {
     const columns = {
       ordinal: 'No.',
       title: 'Title',
@@ -94,27 +36,55 @@ class App extends Component {
       metascore: 'Metascore',
     };
 
-    const movies = this.state.movies.map((movie, index) => {
-      movie.ordinal = index + 1 + ((this.state.currentPage - 1) * this.state.pageLimit);
+    const movies = this.props.movies.map((movie, index) => {
+      movie.ordinal = index + 1 + ((this.props.filters.page - 1) * this.props.filters.limit);
       return movie;
     });
 
     return (
-      <div className="App">
-        <h1>Movies App</h1>
-        <Filters onChange={this.handleChangeFilters} />
+      <React.Fragment>
+        <Filters />
         <Table columns={columns} rows={movies} />
         <div className="flex">
           <Pagination
-            totalRecords={this.state.totalItems}
-            pageLimit={this.state.pageLimit}
+            totalRecords={this.props.total}
+            pageLimit={this.props.filters.limit}
             pageNeighbours={1}
-            onPageChanged={this.onPageChanged}
           />
         </div>
+      </React.Fragment>
+    );
+  }
+
+  renderLoading = () => <LoadingSpinner />
+
+  render() {
+    if (this.props.error) {
+      return <div>An error occurred. Please try again.</div>;
+    }
+
+    return (
+      <div className="App">
+        <h1>Movies App</h1>
+        {this.props.loading ? this.renderLoading() : this.renderContent()}
       </div>
     );
   }
 }
 
-export default withAuth(App);
+
+const mapStateToProps = state => ({
+  movies: state.movies.movies,
+  loading: state.movies.loading,
+  error: state.movies.error,
+  total: state.movies.total,
+  filters: state.filters,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchMovies: (filters) => {
+    dispatch(fetchMovies(filters));
+  },
+});
+
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(App));
