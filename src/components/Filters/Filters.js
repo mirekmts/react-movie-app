@@ -18,9 +18,7 @@ class Filters extends Component {
       <div>
         <div className="custom-dropdown">
           <select name="sortBy" onChange={this.handleChangeFilters} value={sortBy}>
-            <option value="_id">Id</option>
             <option value="title">Title</option>
-            <option value="director">Director</option>
             <option value="year">Year</option>
             <option value="metascore">Metascore</option>
           </select>

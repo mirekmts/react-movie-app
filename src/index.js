@@ -4,16 +4,17 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
-import './index.css';
+import './index.scss';
 import App from './App';
-import { Login } from './components';
+import { Login, SingleMovie } from './components';
 import store from './redux/store';
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <div>
+      <div className="container">
         <Route exact path="/" component={App} />
+        <Route exact path="/movie/:movieId" component={SingleMovie} />
         <Route exact path="/login" component={Login} />
       </div>
     </Router>

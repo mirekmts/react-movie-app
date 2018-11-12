@@ -5,6 +5,7 @@ const initialState = {
   total: 0,
   loading: false,
   error: false,
+  selectedMovie: null,
 };
 
 const moviesReducer = (state = initialState, action) => {
@@ -29,6 +30,11 @@ const moviesReducer = (state = initialState, action) => {
         error: action.payload.error,
         movies: [],
         total: 0,
+      };
+    case actions.SET_SINGLE_MOVIE:
+      return {
+        ...state,
+        selectedMovie: action.payload.movie,
       };
     default:
       return state;

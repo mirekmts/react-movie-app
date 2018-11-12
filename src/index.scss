@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +13,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.container {
+  text-align: center;
+	background-color: #1abc9c;
+	color: rgb(57, 57, 57);
+  padding: 5px;
+  min-height: 100vh;
+  font-family: 'Raleway', sans-serif;
+}
+
+a {
+  text-decoration:none; 
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
 }
