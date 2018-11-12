@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
   setFilter,
@@ -41,6 +42,13 @@ class Filters extends Component {
     );
   }
 }
+
+Filters.propTypes = {
+  setFilter: PropTypes.func,
+  sortDir: PropTypes.number,
+  limit: PropTypes.number,
+  sortBy: PropTypes.string,
+};
 
 const mapStateToProps = state => ({
   sortDir: state.filters.sortDir,

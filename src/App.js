@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
-  withAuth, Pagination, Table, Filters, LoadingSpinner,
+  withAuth, Pagination, Table, Filters, LoadingSpinner, ErrorMessage,
 } from './components';
 import './App.scss';
 import {
@@ -10,10 +11,6 @@ import {
 
 class App extends Component {
   state = { ...this.props.filters }
-
-  getData = () => {
-    this.props.fetchMovies({ ...this.props.filters });
-  }
 
   componentDidMount() {
     this.getData();
@@ -26,6 +23,10 @@ class App extends Component {
       || prevProps.filters.sortDir !== this.props.filters.sortDir) {
       this.getData();
     }
+  }
+
+  getData = () => {
+    this.props.fetchMovies({ ...this.props.filters });
   }
 
   renderContent = () => {
@@ -60,7 +61,7 @@ class App extends Component {
 
   render() {
     if (this.props.error) {
-      return <div>An error occurred. Please try again.</div>;
+      return <ErrorMessage />;
     }
 
     return (
@@ -72,6 +73,19 @@ class App extends Component {
   }
 }
 
+App.propTypes = {
+  filters: PropTypes.shape({
+    limit: PropTypes.number,
+    page: PropTypes.number,
+    sortBy: PropTypes.string,
+    sortDir: PropTypes.number,
+  }),
+  fetchMovies: PropTypes.func,
+  total: PropTypes.number,
+  error: PropTypes.bool,
+  loading: PropTypes.bool,
+  movies: PropTypes.arrayOf(PropTypes.object),
+};
 
 const mapStateToProps = state => ({
   movies: state.movies.movies,

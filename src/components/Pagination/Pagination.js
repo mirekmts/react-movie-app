@@ -145,7 +145,8 @@ Pagination.propTypes = {
   totalRecords: PropTypes.number.isRequired,
   pageLimit: PropTypes.number,
   pageNeighbours: PropTypes.number,
-  onPageChanged: PropTypes.func,
+  setPage: PropTypes.func,
+  currentPage: PropTypes.number,
 };
 
 const mapStateToProps = state => ({
