@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { LoadingSpinner, ErrorMessage } from '../index';
+import { LoadingSpinner, ErrorMessage } from '../../components';
 import {
   fetchActor,
 } from '../../redux/actions';

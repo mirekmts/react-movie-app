@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
   withAuth, Pagination, Table, Filters, LoadingSpinner, ErrorMessage,
-} from './components';
-import './App.scss';
+} from '../../components';
+import './Home.scss';
 import {
   fetchMovies,
-} from './redux/actions';
+} from '../../redux/actions';
 
-class App extends Component {
+class Home extends Component {
   state = { ...this.props.filters }
 
   componentDidMount() {
@@ -73,7 +73,7 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
+Home.propTypes = {
   filters: PropTypes.shape({
     limit: PropTypes.number,
     page: PropTypes.number,
@@ -101,4 +101,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default withAuth(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Home));
