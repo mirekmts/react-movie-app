@@ -35,8 +35,12 @@
   
   th,
   td {
-    padding: 10px;
     text-align: left;
+    padding: 10px 0;
+
+    @media (min-width: 600px) {
+      padding: 10px;
+    }
   }
   
   th {
