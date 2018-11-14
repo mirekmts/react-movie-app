@@ -14,9 +14,9 @@ class Table extends Component {
     const values = Object.keys(this.props.columns).map(column => (
       <td key={row._id + column}>
         {
-          this.props.linkCell === column ? 
-          <Link to={`/movie/${row.imdbId}`}>{row[column]}</Link> : 
-          row[column]
+          this.props.linkCell === column
+            ? <Link to={`/movie/${row.imdbId}`}>{row[column]}</Link>
+            : row[column]
         }
       </td>
     ));
@@ -41,6 +41,7 @@ class Table extends Component {
 Table.propTypes = {
   columns: PropTypes.object.isRequired,
   rows: PropTypes.array.isRequired,
+  linkCell: PropTypes.string,
 };
 
 export default Table;

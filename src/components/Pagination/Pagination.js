@@ -143,7 +143,7 @@ class Pagination extends Component {
 
 Pagination.propTypes = {
   totalRecords: PropTypes.number.isRequired,
-  pageLimit: PropTypes.number,
+  pageLimit: PropTypes.number.isRequired,
   pageNeighbours: PropTypes.number,
   setPage: PropTypes.func,
   currentPage: PropTypes.number,

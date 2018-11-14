@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { LoadingSpinner, ErrorMessage } from '../../components';
+import { LoadingSpinner, ErrorMessage, withAuth } from '../../components';
 import {
   fetchActor,
 } from '../../redux/actions';
+import './Actor.scss';
 
 class Actor extends Component {
   componentDidMount() {
@@ -17,16 +18,18 @@ class Actor extends Component {
     const birthdayDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
 
     return (
-      <div>
-        <div>
-          Name:
-          <a rel="noopener noreferrer" target="_blank" href={`https://www.imdb.com/name/${actor.imdbId}`}>
-            {actor.name}
-          </a>
-        </div>
-        <div>Country: {actor.country}</div>
-        <div>Birthday: {birthdayDate}</div>
+      <div className="single-page-container">
         <img src={actor.photoUrl} alt="actor" />
+        <div className="text-data-container">
+          <p>
+            <span>Name:</span>
+            <a rel="noopener noreferrer" target="_blank" href={`https://www.imdb.com/name/${actor.imdbId}`}>
+              {actor.name}
+            </a>
+          </p>
+          <p><span>Country:</span>{actor.country}</p>
+          <p><span>Birthday:</span>{birthdayDate}</p>
+        </div>
       </div>
     );
   }
@@ -70,4 +73,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Actor);
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(Actor));

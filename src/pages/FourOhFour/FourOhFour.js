@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './FourOhFour.scss';
 
 const FourOhFour = () => (
   <div className="page-not-found">

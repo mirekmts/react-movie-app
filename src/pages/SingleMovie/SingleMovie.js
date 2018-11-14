@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { LoadingSpinner, ErrorMessage } from '../../components';
+import { LoadingSpinner, ErrorMessage, withAuth } from '../../components';
 import {
   fetchSingleMovie,
 } from '../../redux/actions';
+import './SingleMovie.scss';
 
 class SingleMovie extends Component {
   componentDidMount() {
@@ -16,27 +17,29 @@ class SingleMovie extends Component {
     const { movie } = this.props;
 
     return (
-      <div>
-        <div>
-          Title:
-          <a rel="noopener noreferrer" target="_blank" href={`https://www.imdb.com/title/${movie.imdbId}`}>
-            {movie.title}
-          </a>
-        </div>
-        <div>Director: {movie.director}</div>
-        <div>Year: {movie.year}</div>
-        <div>Metascore: {movie.metascore}</div>
-        <ul>
-          Actors list
-          {movie.actors.map(actor => (
-            <li key={actor.imdbId}>
-              <Link to={`/actor/${actor.imdbId}`} key={actor.name}>
-                {actor.name}
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className="single-page-container">
         <img src={movie.posterUrl} alt="poster" />
+        <div className="text-data-container">
+          <p>
+            <span>Title:</span>
+            <a rel="noopener noreferrer" target="_blank" href={`https://www.imdb.com/title/${movie.imdbId}`}>
+              {movie.title}
+            </a>
+          </p>
+          <p><span>Director:</span>{movie.director}</p>
+          <p><span>Year:</span>{movie.year}</p>
+          <p><span>Metascore:</span>{movie.metascore}</p>
+          <ul>
+            <span className="bold ">Actors list</span>
+            {movie.actors.map(actor => (
+              <li key={actor.imdbId}>
+                <Link to={`/actor/${actor.imdbId}`} key={actor.name}>
+                  {actor.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -82,4 +85,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleMovie);
+export default withAuth(connect(mapStateToProps, mapDispatchToProps)(SingleMovie));

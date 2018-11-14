@@ -45,10 +45,10 @@ class Home extends Component {
     return (
       <React.Fragment>
         <Filters />
-        <Table 
-          columns={columns} 
+        <Table
+          columns={columns}
           rows={movies}
-          linkCell="title" 
+          linkCell="title"
         />
         <div className="flex-center py-1">
           <Pagination

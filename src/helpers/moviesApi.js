@@ -13,7 +13,6 @@ export const getMovie = id => api.get(`${serverUrl}/api/v1/movie/${id}`)
   .then(res => Promise.resolve(res))
   .catch(error => Promise.reject(error));
 
-
 export const getAllMovies = ({
   limit = 0, page = 1, sortBy = '_id', sortDir = 1,
 }) => api.get(`${serverUrl}/api/v1/movie?limit=${limit}&page=${page}&sortBy=${sortBy}&sortDir=${sortDir}`)

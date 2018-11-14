@@ -27,7 +27,7 @@ ul.pagination {
       color: saturate(darken($gray-blue, 50%), 5%);
       background-color: saturate(lighten($gray-blue, 7.5%), 2.5%);
       border-color: $gray-blue;
-    cursor: auto;
+      cursor: auto;
     }
   }
 

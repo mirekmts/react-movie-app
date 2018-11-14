@@ -10,20 +10,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 .container {
   box-sizing: border-box;
   text-align: center;
-  background-color: $dark-turquoise2;
   background-color: $dark-turquoise;
 	color: $charleston-green;
   padding: 10px 40px;
   min-height: 100vh;
   font-family: 'Raleway', sans-serif;
+  font-size: 20px;
 }
 
 button:focus {
@@ -42,3 +37,6 @@ ul {
   padding: 0;
 }
 
+p {
+  margin: 5px 0;
+}

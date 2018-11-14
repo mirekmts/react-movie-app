@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { loggedIn } from '../../helpers/jwt';
+import { LoadingSpinner } from '../index';
 
 export default function withAuth(AuthComponent) {
   class AuthWrapped extends Component {
@@ -20,10 +21,10 @@ export default function withAuth(AuthComponent) {
 
     render() {
       if (this.state.waitingForAuthorizationCheck) {
-        return <h1>Loading...</h1>;
+        return <LoadingSpinner />;
       }
 
-      return <AuthComponent history={this.props.history} />;
+      return <AuthComponent {...this.props} />;
     }
   }
 
