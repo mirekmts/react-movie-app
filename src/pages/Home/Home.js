@@ -45,8 +45,12 @@ class Home extends Component {
     return (
       <React.Fragment>
         <Filters />
-        <Table columns={columns} rows={movies} />
-        <div className="flex">
+        <Table 
+          columns={columns} 
+          rows={movies}
+          linkCell="title" 
+        />
+        <div className="flex-center py-1">
           <Pagination
             totalRecords={this.props.total}
             pageLimit={this.props.filters.limit}

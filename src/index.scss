@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway');
-
+@import 'colors';
 body {
   margin: 0;
   padding: 0;
@@ -16,19 +16,29 @@ code {
 }
 
 .container {
+  box-sizing: border-box;
   text-align: center;
-	background-color: #1abc9c;
-	color: rgb(57, 57, 57);
-  padding: 5px;
+  background-color: $dark-turquoise2;
+  background-color: $dark-turquoise;
+	color: $charleston-green;
+  padding: 10px 40px;
   min-height: 100vh;
   font-family: 'Raleway', sans-serif;
 }
 
+button:focus {
+  outline: 0;
+}
+
 a {
   text-decoration:none; 
+  &:visited, &:link {
+    color: $anti-flash-white;
+  }
 }
 
 ul {
   list-style-type: none;
   padding: 0;
 }
+

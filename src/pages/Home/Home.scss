@@ -1,11 +1,12 @@
-.flex {
+
+.flex-center {
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-bottom: 1.5rem;
-  padding-top: 1.5rem;
+  justify-content: center;
 }
 
-button:focus {
-  outline: 0;
+.py-1 {
+  padding-bottom: 1.5rem;
+  padding-top: 1.5rem;
 }

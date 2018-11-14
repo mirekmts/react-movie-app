@@ -13,7 +13,11 @@ class Table extends Component {
   renderRows = () => this.props.rows.map((row) => {
     const values = Object.keys(this.props.columns).map(column => (
       <td key={row._id + column}>
-        {<Link to={`/movie/${row.imdbId}`}>{row[column]}</Link>}
+        {
+          this.props.linkCell === column ? 
+          <Link to={`/movie/${row.imdbId}`}>{row[column]}</Link> : 
+          row[column]
+        }
       </td>
     ));
 

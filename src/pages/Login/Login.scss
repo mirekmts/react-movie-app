@@ -1,3 +1,4 @@
+@import '../../colors';
 .center {
   position: absolute;
   height: 100%;
@@ -8,7 +9,7 @@
 }
 
 .card {
-  background-color: #fff;
+  background-color: $anti-flash-white;
   border-radius: 15px;
   padding: 0.8rem;
 
@@ -30,14 +31,15 @@
   margin-bottom: 2rem;
   height: 30px;
   width: 16rem;
-  border: 1px solid grey;
+  border: 1px solid $gray-blue;
 }
 
 .form-submit {
   font-family: 'Raleway', sans-serif;
   height: 35px;
-  color: #fff;
-  background-color: #1abc9c;
+  color: $anti-flash-white;
+  background-color: $dark-turquoise2;
+  background-color: $dark-turquoise;
   border: none;
   letter-spacing: 0.2rem;
   transition: 0.3s opacity ease;

@@ -1,5 +1,5 @@
-$base-color: #ced4da;
-$light-background: lighten(desaturate($base-color, 50%), 12.5%);
+@import '../../colors';
+$light-background: lighten(desaturate($gray-blue, 50%), 12.5%);
 
 .pagination {
   display: flex;
@@ -18,16 +18,15 @@ ul.pagination {
     padding: .5rem .75rem;
     margin-left: -1px;
     line-height: 1.25;
-    color: #007bff;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
+    background-color: $anti-flash-white;
+    border: 1px solid $gray-blue;
   }
 
   li.page-item.active {
     button.page-link {
-      color: saturate(darken($base-color, 50%), 5%);
-      background-color: saturate(lighten($base-color, 7.5%), 2.5%);
-      border-color: $base-color;
+      color: saturate(darken($gray-blue, 50%), 5%);
+      background-color: saturate(lighten($gray-blue, 7.5%), 2.5%);
+      border-color: $gray-blue;
     cursor: auto;
     }
   }
@@ -37,8 +36,8 @@ ul.pagination {
     min-width: 3.5rem;
     text-align: center;
     box-shadow: none;
-    border-color: $base-color;
-    color: saturate(darken($base-color, 30%), 10%);
+    border-color: $gray-blue;
+    color: saturate(darken($gray-blue, 30%), 10%);
     font-weight: 900;
     font-size: 1rem;
     cursor: pointer;

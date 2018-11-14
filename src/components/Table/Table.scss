@@ -1,10 +1,4 @@
-body {
-  font-family: "Gotham";
-}
-
-$light_grey_bg:rgba(0,0,50,.02);
-$light_grey_bg_hover:rgba(0,0,0,.05);
-$light_grey_border: #ddd;
+@import '../../colors';
 
 .responsive-table {
   width: 100%;
@@ -12,7 +6,7 @@ $light_grey_border: #ddd;
   padding: 0;
   border-collapse: collapse;
   border-spacing: 0;
-  color: #fff;
+  color: $charleston-green;
     
   thead {
     visibility: hidden;
@@ -23,8 +17,8 @@ $light_grey_border: #ddd;
   }
   
   tr {
-    border: 1px solid $light_grey_border;
-    border-bottom: 2px solid $light_grey_border;
+    border: 1px solid $anti-flash-white;
+    border-bottom: 2px solid $anti-flash-white;
     padding: 5px;
     margin-bottom: 10px;
     display: block;
@@ -54,7 +48,7 @@ $light_grey_border: #ddd;
     display: block;
     text-align: left;
     font-size: 13px;
-    border-bottom: 1px dotted $light_grey_border;
+    border-bottom: 1px dotted $anti-flash-white;
     
     &:last-child {
       border-bottom: none;
