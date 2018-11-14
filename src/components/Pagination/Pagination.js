@@ -10,7 +10,7 @@ import {
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
 
-class Pagination extends Component {
+export class Pagination extends Component {
   constructor(props) {
     super(props);
     const { totalRecords = null, pageLimit = 10, pageNeighbours = 0 } = props;
@@ -153,7 +153,7 @@ const mapStateToProps = state => ({
   currentPage: state.filters.page,
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setPage: (page) => {
     dispatch(setPage(page));
   },

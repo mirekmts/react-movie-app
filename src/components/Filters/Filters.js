@@ -6,7 +6,7 @@ import {
 } from '../../redux/actions';
 import './Filters.scss';
 
-class Filters extends Component {
+export class Filters extends Component {
   handleChangeFilters = (event) => {
     const value = event.target.name === 'sortBy' ? event.target.value : parseInt(event.target.value, 10);
     this.props.setFilter(event.target.name, value);
@@ -56,7 +56,7 @@ const mapStateToProps = state => ({
   sortBy: state.filters.sortBy,
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   setFilter: (name, value) => {
     dispatch(setFilter(name, value));
   },
