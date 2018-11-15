@@ -7,7 +7,7 @@ import {
 } from '../../redux/actions';
 import './Actor.scss';
 
-class Actor extends Component {
+export class Actor extends Component {
   componentDidMount() {
     this.props.fetchActor(this.props.match.params.actorId);
   }
@@ -67,7 +67,7 @@ const mapStateToProps = state => ({
   error: state.actor.error,
 });
 
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   fetchActor: (id) => {
     dispatch(fetchActor(id));
   },

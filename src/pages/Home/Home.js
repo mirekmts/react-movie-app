@@ -9,9 +9,7 @@ import {
   fetchMovies,
 } from '../../redux/actions';
 
-class Home extends Component {
-  state = { ...this.props.filters }
-
+export class Home extends Component {
   componentDidMount() {
     this.getData();
   }

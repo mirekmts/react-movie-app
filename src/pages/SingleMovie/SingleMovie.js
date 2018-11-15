@@ -8,7 +8,7 @@ import {
 } from '../../redux/actions';
 import './SingleMovie.scss';
 
-class SingleMovie extends Component {
+export class SingleMovie extends Component {
   componentDidMount() {
     this.props.fetchSingleMovie(this.props.match.params.movieId);
   }
