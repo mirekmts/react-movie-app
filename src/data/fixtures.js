@@ -71,7 +71,6 @@ export const singleMovie = {
 
 export const movies = [
   {
-
     _id: '5be5473892df05190b72f305',
     imdbId: 'tt0848228',
     title: 'Avengers',
@@ -102,3 +101,10 @@ export const movies = [
     posterUrl: 'http://marblejs-example.herokuapp.com/api/v1/assets/img/movie/tt2395427.jpg',
   },
 ];
+
+export const filters = {
+  limit: 2,
+  page: 1,
+  sortBy: 'title',
+  sortDir: 1,
+};

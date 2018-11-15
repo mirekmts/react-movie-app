@@ -1,7 +1,7 @@
 import * as api from './api';
 import { setToken } from './jwt';
 
-const serverUrl = 'http://marblejs-example.herokuapp.com';
+export const serverUrl = 'http://marblejs-example.herokuapp.com';
 
 export const userLogin = (login, password) => api.post(`${serverUrl}/api/v1/auth/login`, { login, password })
   .then((res) => {
