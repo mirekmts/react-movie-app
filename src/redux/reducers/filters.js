@@ -1,6 +1,6 @@
 import * as actions from '../actions';
 
-const initialState = {
+export const initialState = {
   limit: 2,
   page: 1,
   sortBy: 'title',
