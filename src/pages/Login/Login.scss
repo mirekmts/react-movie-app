@@ -37,6 +37,12 @@
   border: 1px solid $gray-blue;
 }
 
+.error-login-message {
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: darkred;
+}
+
 .form-submit {
   font-family: 'Raleway', sans-serif;
   height: 35px;

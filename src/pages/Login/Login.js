@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { loggedIn } from '../../helpers/jwt';
-import * as api from '../../helpers/moviesApi';
 import './Login.scss';
+import { loginUser } from '../../redux/actions';
 
-class Login extends Component {
+export class Login extends Component {
   state = {
     username: '',
     password: '',
@@ -26,7 +27,7 @@ class Login extends Component {
   handleFormSubmit = (e) => {
     e.preventDefault();
 
-    api.userLogin(this.state.username, this.state.password)
+    this.props.loginUser(this.state.username, this.state.password)
       .then(() => this.props.history.replace('/'))
       .catch(() => {
         this.setState({
@@ -55,7 +56,7 @@ class Login extends Component {
               type="password"
               onChange={this.handleChange}
             />
-            {this.state.error && <p>Invalid username/password</p>}
+            {this.state.error && <p className="error-login-message">Invalid username/password</p>}
             <button
               className="form-submit"
               type="submit"
@@ -71,6 +72,11 @@ class Login extends Component {
 
 Login.propTypes = {
   history: PropTypes.object,
+  loginUser: PropTypes.func,
 };
 
-export default Login;
+const mapDispatchToProps = dispatch => ({
+  loginUser: (login, password) => dispatch(loginUser(login, password)),
+});
+
+export default connect(null, mapDispatchToProps)(Login);

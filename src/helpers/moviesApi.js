@@ -3,11 +3,12 @@ import { setToken } from './jwt';
 
 export const serverUrl = 'http://marblejs-example.herokuapp.com';
 
-export const userLogin = (login, password) => api.post(`${serverUrl}/api/v1/auth/login`, { login, password })
+export const loginUser = (login, password) => api.post(`${serverUrl}/api/v1/auth/login`, { login, password })
   .then((res) => {
     setToken(res.token);
     return Promise.resolve(res);
-  });
+  })
+  .catch(error => Promise.reject(error));
 
 export const getMovie = id => api.get(`${serverUrl}/api/v1/movie/${id}`)
   .then(res => Promise.resolve(res))
