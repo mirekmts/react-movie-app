@@ -16,6 +16,11 @@
   border-color: $anti-flash-white transparent $anti-flash-white transparent;
   animation: lds-dual-ring 1.2s linear infinite;
 }
+
+.black:after {
+  border-color: $charleston-green transparent $charleston-green transparent;
+}
+
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);

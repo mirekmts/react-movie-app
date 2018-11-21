@@ -13,7 +13,12 @@ describe('<LoadingSpinner/>', () => {
     expect(wrapper.find('div').props().children).toEqual();
   });
 
-  it('render LoadingSpinner correctly', () => {
+  it('render LoadingSpinner with correctly class', () => {
     expect(wrapper.find('div').hasClass('lds-dual-ring')).toEqual(true);
+  });
+
+  it('render LoadingSpinner with class black', () => {
+    wrapper.setProps({ black: true });
+    expect(wrapper.find('div').hasClass('lds-dual-ring black')).toEqual(true);
   });
 });

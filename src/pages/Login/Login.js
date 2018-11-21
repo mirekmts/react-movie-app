@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { loggedIn } from '../../helpers/jwt';
 import './Login.scss';
 import { loginUser } from '../../redux/actions';
+import { LoadingSpinner } from '../../components';
 
 export class Login extends Component {
   state = {
     username: '',
     password: '',
     error: false,
+    loading: false,
   };
 
   componentDidMount() {
@@ -25,6 +27,10 @@ export class Login extends Component {
   };
 
   handleFormSubmit = (e) => {
+    this.setState({
+      loading: true,
+      error: false,
+    });
     e.preventDefault();
 
     this.props.loginUser(this.state.username, this.state.password)
@@ -32,6 +38,7 @@ export class Login extends Component {
       .catch(() => {
         this.setState({
           error: true,
+          loading: false,
         });
       });
   };
@@ -57,6 +64,7 @@ export class Login extends Component {
               onChange={this.handleChange}
             />
             {this.state.error && <p className="error-login-message">Invalid username/password</p>}
+            {this.state.loading && <div><LoadingSpinner black /></div>}
             <button
               className="form-submit"
               type="submit"
